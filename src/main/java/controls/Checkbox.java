@@ -9,7 +9,7 @@ import pages.PersonalInfoPage;
 
 public class Checkbox extends Widget {
 
-    public static final Logger logger = LogManager.getLogger(Checkbox.class);
+    private static final Logger logger = LogManager.getLogger(Checkbox.class);
 
     public Checkbox(WebElement element) {
         this.element = element;
@@ -29,7 +29,8 @@ public class Checkbox extends Widget {
     public boolean isSelected() {
         this.element = driver.findElement(locator);
         WebElement invisibleInput = (WebElement)((JavascriptExecutor)driver).executeScript("return arguments[0].previousElementSibling", element);
-        return invisibleInput.getAttribute("checked") == null ? false : true;
+        //return invisibleInput.getAttribute("checked") == null ? false : true;
+        return invisibleInput.getAttribute("checked") != null;
 
     }
 }

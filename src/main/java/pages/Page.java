@@ -8,10 +8,6 @@ public class Page {
     WebDriver driver;
 
     public Page() {
-        try {
-            this.driver = DriverBase.getDriver();
-        } catch (Exception e) {
-
-        }
+        this.driver = DriverBase.getDriver();
     }
 }

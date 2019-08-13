@@ -39,7 +39,7 @@ public class DriverFactory {
         selectedDriverType = driverType;
     }
 
-    public RemoteWebDriver getDriver() throws Exception {
+    public RemoteWebDriver getDriver() {
         if (null == driver) {
             instantiateWebDriver(selectedDriverType);
             driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
@@ -58,7 +58,7 @@ public class DriverFactory {
         }
     }
 
-    private void instantiateWebDriver(DriverType driverType) throws MalformedURLException {
+    private void instantiateWebDriver(DriverType driverType) {
         //TODO add in a real logger instead of System.out
         System.out.println(" ");
         System.out.println("Local Operating System: " + operatingSystem);
@@ -84,7 +84,12 @@ public class DriverFactory {
         }
 
         if (useRemoteWebDriver) {
-            URL seleniumGridURL = new URL(System.getProperty("gridURL"));
+            URL seleniumGridURL = null;
+            try {
+                seleniumGridURL = new URL(System.getProperty("gridURL"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
             String desiredBrowserVersion = System.getProperty("desiredBrowserVersion");
             String desiredPlatform = System.getProperty("desiredPlatform");
 

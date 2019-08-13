@@ -1,10 +1,7 @@
 import config.DriverBase;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import model.Builder;
 import model.UserData;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import pages.LoginPage;
 import pages.MainPage;
@@ -21,11 +18,6 @@ public class PersonalInfoTests {
         private LoginPage loginPage;
         private PersonalInfoPage personalInfoPage;
 
-        @BeforeClass
-        public static void setupClass() {
-            WebDriverManager.chromedriver().setup();
-        }
-
         @Before
         public void setupTest() {
             mainPage = new MainPage();
@@ -40,7 +32,7 @@ public class PersonalInfoTests {
             contacts.add(new UserData.ContactData("VK", "https://vk.com/learner", true));
             List<UserData.ExperienceData> experience = new ArrayList<>();
             experience.add(new UserData.ExperienceData("Java", "1 год"));
-            UserData userForCreate = new Builder()
+            UserData userForCreate = UserData.newBuilder()
                     .setFirstName("лернер")
                     .setFirstNameLatin("learner")
                     .setLastName("лернер")
@@ -49,16 +41,16 @@ public class PersonalInfoTests {
                     .setBirthday(LocalDate.of(2000, 1, 1))
                     .setCountry("Россия")
                     .setCity("Москва")
-                    .setIsReadyForRelocation(true)
+                    .setReadyForRelocation(true)
                     .setWorkSchedule(Arrays.asList("Полный день", "Удаленно"))
-                    .setIsEmailPreferable(false)
-                    .setIsPhonePreferable(true)
+                    .setEmailPreferable(false)
+                    .setPhonePreferable(true)
                     .setContacts(contacts)
                     .setGender("Мужской")
                     .setCompany("Otus")
                     .setPosition("learner")
                     .setExperience(experience)
-                    .createUserData();
+                    .build();
             mainPage.open();
             mainPage.header.openAuthPage();
             loginPage.logIn(System.getProperty("otus.login"), System.getProperty("otus.password"));

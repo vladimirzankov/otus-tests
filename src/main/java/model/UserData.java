@@ -23,160 +23,172 @@ public class UserData {
     private String position;
     private List<ExperienceData> experience;
 
-    public UserData(String firstName, String firstNameLatin, String lastName, String lastNameLatin, String blogName, LocalDate birthday, String country, String city, boolean isReadyForRelocation, List<String> workSchedule, boolean isEmailPreferable, boolean isPhonePreferable, List<ContactData> contacts, String gender, String company, String position, List<ExperienceData> experience) {
-        this.firstName = firstName;
-        this.firstNameLatin = firstNameLatin;
-        this.lastName = lastName;
-        this.lastNameLatin = lastNameLatin;
-        this.blogName = blogName;
-        this.birthday = birthday;
-        this.country = country;
-        this.city = city;
-        this.isReadyForRelocation = isReadyForRelocation;
-        this.workSchedule = workSchedule;
-        this.isEmailPreferable = isEmailPreferable;
-        this.isPhonePreferable = isPhonePreferable;
-        this.contacts = contacts;
-        this.gender = gender;
-        this.company = company;
-        this.position = position;
-        this.experience = experience;
-    }
+    private UserData() {}
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getFirstNameLatin() {
         return firstNameLatin;
     }
 
-    public void setFirstNameLatin(String firstNameLatin) {
-        this.firstNameLatin = firstNameLatin;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getLastNameLatin() {
         return lastNameLatin;
     }
 
-    public void setLastNameLatin(String lastNameLatin) {
-        this.lastNameLatin = lastNameLatin;
-    }
-
     public String getBlogName() {
         return blogName;
-    }
-
-    public void setBlogName(String blogName) {
-        this.blogName = blogName;
     }
 
     public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
     public String getCountry() {
         return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public boolean isReadyForRelocation() {
         return isReadyForRelocation;
-    }
-
-    public void setReadyForRelocation(boolean readyForRelocation) {
-        isReadyForRelocation = readyForRelocation;
     }
 
     public List<ContactData> getContacts() {
         return contacts;
     }
 
-    public void setContacts(List<ContactData> contacts) {
-        this.contacts = contacts;
-    }
-
     public String getGender() {
         return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getCompany() {
         return company;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
     public List<String> getWorkSchedule() {
         return workSchedule;
-    }
-
-    public void setWorkSchedule(List<String> workSchedule) {
-        this.workSchedule = workSchedule;
     }
 
     public boolean isEmailPreferable() {
         return isEmailPreferable;
     }
 
-    public void setEmailPreferable(boolean emailPreferable) {
-        isEmailPreferable = emailPreferable;
-    }
-
     public boolean isPhonePreferable() {
         return isPhonePreferable;
-    }
-
-    public void setPhonePreferable(boolean phonePreferable) {
-        isPhonePreferable = phonePreferable;
     }
 
     public String getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     public List<ExperienceData> getExperience() {
         return experience;
     }
 
-    public void setExperience(List<ExperienceData> experience) {
-        this.experience = experience;
+    public static Builder newBuilder() {
+        return new UserData().new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() {}
+
+        public Builder setFirstName(String firstName) {
+            UserData.this.firstName = firstName;
+            return this;
+        }
+
+        public Builder setFirstNameLatin(String firstNameLatin) {
+            UserData.this.firstNameLatin = firstNameLatin;
+            return this;
+        }
+
+        public Builder setLastName(String lastName) {
+            UserData.this.lastName = lastName;
+            return this;
+        }
+
+        public Builder setLastNameLatin(String lastNameLatin) {
+            UserData.this.lastNameLatin = lastNameLatin;
+            return this;
+        }
+
+        public Builder setBlogName(String blogName) {
+            UserData.this.blogName = blogName;
+            return this;
+        }
+
+        public Builder setBirthday(LocalDate birthday) {
+            UserData.this.birthday = birthday;
+            return this;
+        }
+
+        public Builder setCountry(String country) {
+            UserData.this.country = country;
+            return this;
+        }
+
+        public Builder setCity(String city) {
+            UserData.this.city = city;
+            return this;
+        }
+
+        public Builder setReadyForRelocation(boolean readyForRelocation) {
+            UserData.this.isReadyForRelocation = readyForRelocation;
+            return this;
+        }
+
+        public Builder setContacts(List<ContactData> contacts) {
+            UserData.this.contacts = contacts;
+            return this;
+        }
+
+        public Builder setGender(String gender) {
+            UserData.this.gender = gender;
+            return this;
+        }
+
+        public Builder setCompany(String company) {
+            UserData.this.company = company;
+            return this;
+        }
+
+        public Builder setWorkSchedule(List<String> workSchedule) {
+            UserData.this.workSchedule = workSchedule;
+            return this;
+        }
+
+        public Builder setEmailPreferable(boolean emailPreferable) {
+            UserData.this.isEmailPreferable = emailPreferable;
+            return this;
+        }
+
+        public Builder setPhonePreferable(boolean phonePreferable) {
+            UserData.this.isPhonePreferable = phonePreferable;
+            return this;
+        }
+
+        public Builder setPosition(String position) {
+            UserData.this.position = position;
+            return this;
+        }
+
+        public Builder setExperience(List<ExperienceData> experience) {
+            UserData.this.experience = experience;
+            return this;
+        }
+
+        public UserData build() {
+            return UserData.this;
+        }
     }
 
     public static class ContactData {
@@ -195,24 +207,12 @@ public class UserData {
             return type;
         }
 
-        public void setType(String type) {
-            this.type = type;
-        }
-
         public String getValue() {
             return value;
         }
 
-        public void setValue(String value) {
-            this.value = value;
-        }
-
         public boolean isPreferable() {
             return isPreferable;
-        }
-
-        public void setPreferable(boolean preferable) {
-            isPreferable = preferable;
         }
     }
 
@@ -230,16 +230,8 @@ public class UserData {
             return level;
         }
 
-        public void setLevel(String level) {
-            this.level = level;
-        }
-
         public String getLanguage() {
             return language;
-        }
-
-        public void setLanguage(String language) {
-            this.language = language;
         }
     }
 }

@@ -19,11 +19,7 @@ public class DriverBase {
     }
 
     public static RemoteWebDriver getDriver() {
-        try {
-            return driverFactoryThread.get().getDriver();
-        }
-        catch(Exception e) { throw new RuntimeException(); }
-
+        return driverFactoryThread.get().getDriver();
     }
 
     public static void clearCookies() {

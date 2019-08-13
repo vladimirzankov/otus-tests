@@ -1,7 +1,6 @@
 package pages;
 
 import controls.*;
-import model.Builder;
 import model.UserData;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -153,18 +152,13 @@ public class PersonalInfoPage extends Page{
             new Select(driver.findElement(experienceLevel(i))).selectByVisibleText(user.getExperience().get(i).getLevel());
         }
         deleteExperienceWithIndexGreaterThat(user.getExperience().size());
-        saveButton.interact();
+        saveAndContinueButton.interact();
     }
 
     public List<String> getWorkSchedule() {
         List<String> workSchedule = new ArrayList<>();
         workSchedule.add("Полный день"); workSchedule.add("Гибкий график"); workSchedule.add("Удаленно");
-        for(Iterator<String> iterator = workSchedule.iterator(); iterator.hasNext();) {
-            String value = iterator.next();
-            if(!(workSchedule(value).isSelected())) {
-                iterator.remove();
-            }
-        }
+        workSchedule.removeIf(s -> !(workSchedule(s).isSelected()));
         return workSchedule;
     }
 
@@ -182,7 +176,7 @@ public class PersonalInfoPage extends Page{
             String level = new Select(driver.findElement(experienceLevel(i))).getFirstSelectedOption().getText();
             experience.add(new UserData.ExperienceData(language, level));
         }
-        UserData user = new Builder()
+        UserData user = UserData.newBuilder()
                 .setFirstName(firstName.getAttribute("value"))
                 .setFirstNameLatin(firstNameLatin.getAttribute("value"))
                 .setLastName(lastName.getAttribute("value"))
@@ -191,16 +185,16 @@ public class PersonalInfoPage extends Page{
                 .setBirthday(LocalDate.parse(birthday.getAttribute("value"), DateTimeFormatter.ofPattern("dd.MM.yyyy")))
                 .setCountry(countrySelect.getText())
                 .setCity(citySelect.getText())
-                .setIsReadyForRelocation(readyForRelocateRadiobutton(true).isSelected())
+                .setReadyForRelocation(readyForRelocateRadiobutton(true).isSelected())
                 .setWorkSchedule(getWorkSchedule())
-                .setIsEmailPreferable(isEmailPreferableCheckbox.isSelected())
-                .setIsPhonePreferable(isPhonePreferableCheckbox.isSelected())
+                .setEmailPreferable(isEmailPreferableCheckbox.isSelected())
+                .setPhonePreferable(isPhonePreferableCheckbox.isSelected())
                 .setContacts(contacts)
                 .setGender(new Select(driver.findElement(genderSelectLocator)).getFirstSelectedOption().getText())
                 .setCompany(company.getAttribute("value"))
                 .setPosition(position.getAttribute("value"))
                 .setExperience(experience)
-                .createUserData();
+                .build();
         return user;
     }
 }

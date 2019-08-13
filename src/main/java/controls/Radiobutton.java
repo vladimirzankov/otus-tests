@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 public class Radiobutton extends Widget {
 
-    public static final Logger logger = LogManager.getLogger(Button.class);
+    private static final Logger logger = LogManager.getLogger(Button.class);
 
     public Radiobutton(WebElement element) {
         this.element = element;
@@ -27,6 +27,6 @@ public class Radiobutton extends Widget {
     public boolean isSelected() {
         this.element = driver.findElement(locator);
         WebElement invisibleInput = (WebElement)((JavascriptExecutor)driver).executeScript("return arguments[0].previousElementSibling", element);
-        return invisibleInput.getAttribute("checked") == null ? false : true;
+        return invisibleInput.getAttribute("checked") != null;
     }
 }

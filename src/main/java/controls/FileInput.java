@@ -9,7 +9,7 @@ import java.io.File;
 
 public class FileInput extends Widget {
 
-    public static final Logger logger = LogManager.getLogger(FileInput.class);
+    private static final Logger logger = LogManager.getLogger(FileInput.class);
 
     public FileInput(WebElement element) {
         this.element = element;

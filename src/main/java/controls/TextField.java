@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class TextField extends Widget {
 
-    public static final Logger logger = LogManager.getLogger(TextField.class);
+    private static final Logger logger = LogManager.getLogger(TextField.class);
 
     public TextField(WebElement element) {
         this.element = element;
